@@ -1,6 +1,6 @@
 package com.bridgelabz;
 
-public class AddressBookSystem
+public class Contact
 {
     String firstName;
     String lastName;
@@ -11,7 +11,10 @@ public class AddressBookSystem
     String phoneNumber;
     String emailId;
 
-    public AddressBookSystem() {
+    //Parameterized Contact constructor
+    public Contact(String firstName, String lastName, String address, String city, String state, String zip,
+                   String phoneNumber, String emailId) {
+        super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -22,8 +25,9 @@ public class AddressBookSystem
         this.emailId = emailId;
     }
 
+    //Method for displaying data
     public void showData() {
-        System.out.println("\nFirst Name : "+firstName);
+        System.out.println("First Name : "+firstName);
         System.out.println("Last Name : "+lastName);
         System.out.println("Address : "+address);
         System.out.println("City : "+city);
@@ -33,7 +37,4 @@ public class AddressBookSystem
         System.out.println("Email Id : "+emailId);
     }
 
-
-    public void addToaddressBookSystem(Contact personObj) {
-    }
 }
