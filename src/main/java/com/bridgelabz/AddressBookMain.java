@@ -8,25 +8,28 @@ public class AddressBookMain
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        String firstName,lastName, address, city, state, zip, phoneNo, email;
-
-        System.out.println("Enter first name, last name, address, city, state, zip, phone number, email ID sequentially");
-        firstName = input.nextLine();
-        lastName = input.nextLine();
-        address = input.nextLine();
-        city = input.nextLine();
-        state = input.nextLine();
-        zip = input.nextLine();
-        phoneNo = input.nextLine();
-        email = input.nextLine();
-
-        Contact personObj = new Contact(firstName, lastName, address, city, state, zip, phoneNo, email);
-        personObj.showData();
-
         AddressBookSystem addressBook1 = new AddressBookSystem();
-        addressBook1.addToaddressBookSystem(personObj);
+        int choice =1;
 
+        while (choice!=0){
+            switch (choice){
+                case 0:
+                    return;
+                case 1:
+                    addressBook1.addToAddressBook();
+                    break;
+                case 2:
+                    addressBook1.editPersonName();
+                    break;
+                case 3:
+                    addressBook1.displayAddressBook();
+                    break;
+            }
 
+            System.out.println("Press 0 to exit \nPress 1 to add more contact \nPress 2 to edit contact \nPress 3 to display");
+            choice = input.nextInt();
+        }
 
+        input.close();
     }
 }
