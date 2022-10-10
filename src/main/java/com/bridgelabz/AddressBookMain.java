@@ -2,7 +2,7 @@ package com.bridgelabz;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-// adding UC-7 added duplicate  contact in address book System
+// adding UC-8 search duplicate  contact in address book System
 public class AddressBookMain {
 
 
@@ -47,8 +47,6 @@ public class AddressBookMain {
         while (choice!=0){
 
             switch (choice){
-                case 0:
-                    return;
 
                 case 1:
                     addressBook2.addToAddressBook();
@@ -65,7 +63,7 @@ public class AddressBookMain {
             }
 
             System.out.println("\nPress 0 to exit \nPress 1 to add more contact \nPress 2 to edit contact \nPress 3 to display \nPress 4 to delete contact");
-            choice = input.nextInt();
+            choice = Integer.parseInt(input.next());
         }
 
         //add addressBook2 to  addressBookList
@@ -74,8 +72,24 @@ public class AddressBookMain {
 
         //Display all addressBooks stored in addressBookList
         System.out.println("Displaying all address books stored in arraylist\n");
-        for(int i=0;i<addressBookList.size();i++) {
-            addressBookList.get(i).displayAddressBook();
+        for (AddressBookSystem addressBookSystem : addressBookList) {
+            addressBookSystem.displayAddressBook();
+        }
+
+        //Display person within the city
+        System.out.println("\nEnter city name to find person");
+        String cityName = input.next();
+        System.out.println("Display person within the city");
+        for (AddressBookSystem addressBookSystem : addressBookList) {
+            addressBookSystem.displayPersonInCity(cityName);
+        }
+
+        //Display person within the state
+        System.out.println("\nEnter state to find person");
+        String stateName = input.next();
+        System.out.println("Display person within the state");
+        for (AddressBookSystem addressBookSystem : addressBookList) {
+            addressBookSystem.displayPersonInState(stateName);
         }
     }
 }

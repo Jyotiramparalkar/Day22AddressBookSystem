@@ -1,5 +1,5 @@
 package com.bridgelabz;
-// ability ot UC-7  duplicate  contact person.
+// ability ot UC-8  searching multiole contact person.
 public class Contact
 {
 
@@ -39,5 +39,6 @@ public class Contact
             System.out.println("Phone Number : "+phoneNumber);
             System.out.println("Email Id : "+emailId);
         }
+
 
     }

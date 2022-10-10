@@ -2,7 +2,7 @@ package com.bridgelabz;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-// UC-7 refactor multiple contact in address book System
+// UC-8 searching contact in city or multiple  in address book System
 public class AddressBookSystem {
 
     ArrayList<Contact> contactList = new ArrayList<Contact>();
@@ -49,10 +49,10 @@ public class AddressBookSystem {
         System.out.println("Enter name to update");
         String nameToUpdate = input.nextLine();
 
-        for(int i=0; i < contactList.size(); i++) {
-            if(contactList.get(i).firstName.equals(currentName)) {
-                contactList.get(i).firstName = nameToUpdate;
-                check=1;
+        for (Contact contact : contactList) {
+            if (contact.firstName.equals(currentName)) {
+                contact.firstName = nameToUpdate;
+                check = 1;
                 System.out.println(check);
                 return;
             }
@@ -67,8 +67,8 @@ public class AddressBookSystem {
 
     public void displayAddressBook() {
         System.out.println("Displaying all contacts from address book");
-        for(int i=0; i < contactList.size(); i++) {
-            contactList.get(i).displayContact();
+        for (Contact contact : contactList) {
+            contact.displayContact();
             System.out.println("---------------------");
         }
     }
@@ -89,6 +89,31 @@ public class AddressBookSystem {
         }
         if(found==0) {
             System.out.println("No record found with given name to delete");
+        }
+    }
+
+    //Search for person in city
+    public void displayPersonInCity(String cityName) {
+        int found=0;
+        for (Contact contact : contactList) {
+            if (contact.city.equalsIgnoreCase(cityName)) {
+                found = 1;
+                System.out.println("Person Name : " + contact.firstName + " " + contact.lastName);
+            }
+        }
+        if(found==0) {
+            System.out.println("No person found in given city");
+        }
+    }
+
+    //Search for person in state
+    public void displayPersonInState(String stateName) {
+        int found=0;
+        for (Contact contact : contactList) {
+            if (contact.state.equalsIgnoreCase(stateName)) {
+                found = 1;
+                System.out.println("Person Name : " + contact.firstName + " " + contact.lastName);
+            }
         }
     }
 }
