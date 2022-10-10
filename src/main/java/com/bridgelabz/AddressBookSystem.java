@@ -63,4 +63,18 @@ public class AddressBookSystem
             contactList.get(i).displayContact();
         }
     }
+    //Delete a contact using name
+    public void deleteContact()
+    {
+        System.out.println("\n person to delete contact");
+        String name = input.nextLine();
+        for(int i=0; i <contactList.size(); i++)
+        {
+            if(contactList.get(i).firstName.equals(name))
+            {
+                contactList.remove(i);
+                break;
+            }
+        }
+    }
 }

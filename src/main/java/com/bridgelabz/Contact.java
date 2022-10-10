@@ -25,6 +25,7 @@ public class Contact
             this.emailId = emailId;
         }
 
+
         //Method for displaying data
         public void displayContact() {
             System.out.println("First Name : "+firstName);
