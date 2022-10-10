@@ -1,5 +1,5 @@
 package com.bridgelabz;
-// ability ot UC-8  searching multiole contact person.
+// ability ot UC-10  searching multiole contact person.
 public class Contact
 {
 

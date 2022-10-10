@@ -2,8 +2,9 @@ package com.bridgelabz;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-// adding UC-8 search duplicate  contact in address book System
-public class AddressBookMain {
+// adding UC-10 getting person details contact in address book System
+public class AddressBookMain
+{
 
 
     public static void main(String[] args) {
@@ -12,11 +13,11 @@ public class AddressBookMain {
         AddressBookSystem addressBook1 = new AddressBookSystem();
         AddressBookSystem addressBook2 = new AddressBookSystem();
 
-        int choice =1;
+        int choice = 1;
         //Store contacts to addressBook1
 
-        while (choice!=0){
-            switch (choice){
+        while (choice != 0) {
+            switch (choice) {
                 case 0:
                     return;
                 case 1:
@@ -43,10 +44,10 @@ public class AddressBookMain {
 
         //Store contacts to addressBook2
         System.out.println("Enter input for 2nd AddressBook");
-        choice =1;
-        while (choice!=0){
+        choice = 1;
+        while (choice != 0) {
 
-            switch (choice){
+            switch (choice) {
                 case 0:
                     return;
 
@@ -74,16 +75,16 @@ public class AddressBookMain {
 
         //Display all addressBooks stored in addressBookList
         System.out.println("Displaying all address books stored in arraylist\n");
-        for (AddressBookSystem addressBookSystem : addressBookList) {
-            addressBookSystem.displayAddressBook();
+        for (AddressBookSystem system : addressBookList) {
+            system.displayAddressBook();
         }
 
         //Display person within the city
         System.out.println("\nEnter city name to find person");
         String cityName = input.next();
         System.out.println("Display person within the city");
-        for (AddressBookSystem addressBookSystem : addressBookList) {
-            addressBookSystem.displayPersonInCity(cityName);
+        for (AddressBookSystem bookSystem : addressBookList) {
+            bookSystem.displayPersonInCity(cityName);
         }
 
         //Display person within the state

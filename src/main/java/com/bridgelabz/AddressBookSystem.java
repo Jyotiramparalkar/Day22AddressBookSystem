@@ -5,7 +5,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Scanner;
 // UC-8 searching contact in city or multiple  in address book System
-public class AddressBookSystem{
+public class AddressBookSystem {
 
     ArrayList<Contact> contactList = new ArrayList<Contact>();
     Scanner input = new Scanner(System.in);
@@ -51,10 +51,10 @@ public class AddressBookSystem{
         System.out.println("Enter name to update");
         String nameToUpdate = input.nextLine();
 
-        for(int i=0; i < contactList.size(); i++) {
-            if(contactList.get(i).firstName.equals(currentName)) {
-                contactList.get(i).firstName = nameToUpdate;
-                check=1;
+        for (Contact contact : contactList) {
+            if (contact.firstName.equals(currentName)) {
+                contact.firstName = nameToUpdate;
+                check = 1;
                 System.out.println(check);
                 return;
             }
@@ -69,8 +69,8 @@ public class AddressBookSystem{
 
     public void displayAddressBook() {
         System.out.println("Displaying all contacts from address book");
-        for(int i=0; i < contactList.size(); i++) {
-            contactList.get(i).displayContact();
+        for (Contact contact : contactList) {
+            contact.displayContact();
             System.out.println("---------------------");
         }
     }
@@ -102,7 +102,7 @@ public class AddressBookSystem{
                 cityPerson.put(cityName, contact.firstName);
             }
         }
-        System.out.println(cityPerson);
+        System.out.println("Number of contacts with city "+cityName+" : "+cityPerson.size()+"\n"+cityPerson);
     }
 
     //Search for person in state
@@ -114,6 +114,6 @@ public class AddressBookSystem{
                 statePerson.put(stateName, contact.firstName);
             }
         }
-        System.out.println(statePerson);
+        System.out.println("Number of contacts with state "+stateName+" : "+statePerson.size()+"\n"+statePerson);
     }
 }
