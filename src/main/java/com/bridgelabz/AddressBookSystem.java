@@ -2,7 +2,7 @@ package com.bridgelabz;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-// UC-5 Adding multiple contact in address book System
+// UC-6 refactor multiple contact in address book System
 public class AddressBookSystem {
 
     ArrayList<Contact> contactList = new ArrayList<Contact>();
@@ -24,7 +24,6 @@ public class AddressBookSystem {
         email1 = input.nextLine();
 
         Contact personContact =  new Contact(firstName1, lastName1, address1, city1, state1, zip1, phoneNo1, email1);
-
         contactList.add(personContact);
     }
 

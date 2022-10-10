@@ -1,5 +1,5 @@
 package com.bridgelabz;
-// ability ot UC-5 adding multiple contact person.
+// ability ot UC-6 refactor multiple contact person.
 public class Contact
 {
         String firstName;
