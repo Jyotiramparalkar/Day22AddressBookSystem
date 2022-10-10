@@ -1,7 +1,9 @@
 package com.bridgelabz;
-// ability ot UC-6 refactor multiple contact person.
+// ability ot UC-7  duplicate  contact person.
 public class Contact
 {
+
+
         String firstName;
         String lastName;
         String address;

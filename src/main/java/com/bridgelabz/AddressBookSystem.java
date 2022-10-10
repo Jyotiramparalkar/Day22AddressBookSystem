@@ -2,7 +2,7 @@ package com.bridgelabz;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-// UC-6 refactor multiple contact in address book System
+// UC-7 refactor multiple contact in address book System
 public class AddressBookSystem {
 
     ArrayList<Contact> contactList = new ArrayList<Contact>();
@@ -24,7 +24,20 @@ public class AddressBookSystem {
         email1 = input.nextLine();
 
         Contact personContact =  new Contact(firstName1, lastName1, address1, city1, state1, zip1, phoneNo1, email1);
-        contactList.add(personContact);
+        if(contactList.isEmpty()) {
+            contactList.add(personContact);
+        }
+        else {
+            for(int i=0; i < contactList.size(); i++) {
+                if(contactList.get(i).firstName.equals(firstName1) && contactList.get(i).lastName.equals(lastName1)) {
+                    System.out.println("Person already exists with same first name and last name");
+                    break;
+                }
+                else {
+                    contactList.add(personContact);
+                }
+            }
+        }
     }
 
     // Edit person name for the given name
