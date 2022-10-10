@@ -47,6 +47,8 @@ public class AddressBookMain {
         while (choice!=0){
 
             switch (choice){
+                case 0:
+                    return;
 
                 case 1:
                     addressBook2.addToAddressBook();

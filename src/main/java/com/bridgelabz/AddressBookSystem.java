@@ -1,9 +1,11 @@
 package com.bridgelabz;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Scanner;
 // UC-8 searching contact in city or multiple  in address book System
-public class AddressBookSystem {
+public class AddressBookSystem{
 
     ArrayList<Contact> contactList = new ArrayList<Contact>();
     Scanner input = new Scanner(System.in);
@@ -49,10 +51,10 @@ public class AddressBookSystem {
         System.out.println("Enter name to update");
         String nameToUpdate = input.nextLine();
 
-        for (Contact contact : contactList) {
-            if (contact.firstName.equals(currentName)) {
-                contact.firstName = nameToUpdate;
-                check = 1;
+        for(int i=0; i < contactList.size(); i++) {
+            if(contactList.get(i).firstName.equals(currentName)) {
+                contactList.get(i).firstName = nameToUpdate;
+                check=1;
                 System.out.println(check);
                 return;
             }
@@ -67,8 +69,8 @@ public class AddressBookSystem {
 
     public void displayAddressBook() {
         System.out.println("Displaying all contacts from address book");
-        for (Contact contact : contactList) {
-            contact.displayContact();
+        for(int i=0; i < contactList.size(); i++) {
+            contactList.get(i).displayContact();
             System.out.println("---------------------");
         }
     }
@@ -93,27 +95,25 @@ public class AddressBookSystem {
     }
 
     //Search for person in city
+    Dictionary<String, String> cityPerson = new Hashtable<String, String>();
     public void displayPersonInCity(String cityName) {
-        int found=0;
         for (Contact contact : contactList) {
             if (contact.city.equalsIgnoreCase(cityName)) {
-                found = 1;
-                System.out.println("Person Name : " + contact.firstName + " " + contact.lastName);
+                cityPerson.put(cityName, contact.firstName);
             }
         }
-        if(found==0) {
-            System.out.println("No person found in given city");
-        }
+        System.out.println(cityPerson);
     }
 
     //Search for person in state
+    Dictionary<String, String> statePerson = new Hashtable<String, String>();
     public void displayPersonInState(String stateName) {
-        int found=0;
+
         for (Contact contact : contactList) {
             if (contact.state.equalsIgnoreCase(stateName)) {
-                found = 1;
-                System.out.println("Person Name : " + contact.firstName + " " + contact.lastName);
+                statePerson.put(stateName, contact.firstName);
             }
         }
+        System.out.println(statePerson);
     }
 }
