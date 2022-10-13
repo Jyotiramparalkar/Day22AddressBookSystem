@@ -8,13 +8,13 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
-// UC-11 searching contact in city or multiple  in address book System
+// UC-12 sorting city name zip code in address book System
 public class AddressBookSystem {
 
-    ArrayList<Contact> contactList = new ArrayList<Contact>();
+    List<Contact> contactList = new ArrayList<Contact>();
     Scanner input = new Scanner(System.in);
 
-    String firstName1, lastName1, address1, city1, state1, zip1, phoneNo1, email1;
+    String firstName1,lastName1, address1, city1, state1, zip1, phoneNo1, email1;
 
     //add contact to addressbook
 
@@ -29,17 +29,21 @@ public class AddressBookSystem {
         phoneNo1 = input.nextLine();
         email1 = input.nextLine();
 
-        Contact personContact = new Contact(firstName1, lastName1, address1, city1, state1, zip1, phoneNo1, email1);
-        if (contactList.isEmpty()) {
+        Contact personContact =  new Contact(firstName1, lastName1, address1, city1, state1, zip1, phoneNo1, email1);
+        if(contactList.isEmpty()) {
             contactList.add(personContact);
-        } else {
-            for (int i = 0; i < contactList.size(); i++) {
-                if (contactList.get(i).firstName.equals(firstName1) && contactList.get(i).lastName.equals(lastName1)) {
-                    System.out.println("Person already exists with same first name and last name");
+        }
+        else {
+            boolean isDuplicate =false;
+            for(int i=0; i < contactList.size(); i++) {
+                if(contactList.get(i).firstName.equals(firstName1) && contactList.get(i).lastName.equals(lastName1)) {
+                    //System.out.println("Person already exists with same first name and last name");
+                    isDuplicate = true;
                     break;
-                } else {
-                    contactList.add(personContact);
                 }
+            }
+            if(isDuplicate == false) {
+                contactList.add(personContact);
             }
         }
     }
@@ -47,22 +51,22 @@ public class AddressBookSystem {
     // Edit person name for the given name
 
     public void editPersonName() {
-        int check = 0;
+        int check=0;
         System.out.println("\nEnter current name of person to edit name");
         String currentName = input.nextLine();
         System.out.println("Enter name to update");
         String nameToUpdate = input.nextLine();
 
-        for (Contact contact : contactList) {
-            if (contact.firstName.equals(currentName)) {
-                contact.firstName = nameToUpdate;
-                check = 1;
+        for(int i=0; i < contactList.size(); i++) {
+            if(contactList.get(i).firstName.equals(currentName)) {
+                contactList.get(i).firstName = nameToUpdate;
+                check=1;
                 System.out.println(check);
                 return;
             }
         }
 
-        if (check == 0) {
+        if(check==0) {
             System.out.println("No record found with given name");
         }
     }
@@ -71,8 +75,8 @@ public class AddressBookSystem {
 
     public void displayAddressBook() {
         System.out.println("Displaying all contacts from address book");
-        for (Contact contact : contactList) {
-            contact.displayContact();
+        for(int i=0; i < contactList.size(); i++) {
+            contactList.get(i).displayContact();
             System.out.println("---------------------");
         }
     }
@@ -83,50 +87,75 @@ public class AddressBookSystem {
 
         System.out.println("\nEnter name of person to delete contact");
         String name = input.nextLine();
-        int found = 0;
-        for (int i = 0; i < contactList.size(); i++) {
-            if (contactList.get(i).firstName.equals(name)) {
+        int found=0;
+        for(int i=0; i <contactList.size(); i++) {
+            if(contactList.get(i).firstName.equals(name)) {
                 contactList.remove(i);
-                found = 1;
+                found=1;
                 return;
             }
         }
-        if (found == 0) {
+        if(found==0) {
             System.out.println("No record found with given name to delete");
         }
     }
 
     //Search for person in city
     Dictionary<String, String> cityPerson = new Hashtable<String, String>();
-
     public void displayPersonInCity(String cityName) {
-        for (Contact contact : contactList) {
-            if (contact.city.equalsIgnoreCase(cityName)) {
-                cityPerson.put(cityName, contact.firstName);
+        for(int i=0; i <contactList.size(); i++) {
+            if(contactList.get(i).city.equalsIgnoreCase(cityName)) {
+                cityPerson.put(cityName, contactList.get(i).firstName);
             }
         }
-        System.out.println("Number of contacts with city " + cityName + " : " + cityPerson.size() + "\n" + cityPerson);
+        System.out.println("Number of contacts with city "+cityName+" : "+cityPerson.size()+"\n"+cityPerson);
     }
 
     //Search for person in state
     Dictionary<String, String> statePerson = new Hashtable<String, String>();
-
     public void displayPersonInState(String stateName) {
 
-        for (Contact contact : contactList) {
-            if (contact.state.equalsIgnoreCase(stateName)) {
-                statePerson.put(stateName, contact.firstName);
+        for(int i=0; i <contactList.size(); i++) {
+            if(contactList.get(i).state.equalsIgnoreCase(stateName)) {
+                statePerson.put(stateName, contactList.get(i).firstName);
             }
         }
-        System.out.println("Number of contacts with state " + stateName + " : " + statePerson.size() + "\n" + statePerson);
-
-
+        System.out.println("Number of contacts with state "+stateName+" : "+statePerson.size()+"\n"+statePerson);
     }
 
-    public void sortAddressBook()
-    {
-        List<Contact> sortedAddressBook = contactList.stream().sorted(Comparator.comparing(Contact::getFirstName)).collect(Collectors.toList());
+
+    // UC11 - Ability to sort the entries in the
+    // address book alphabetically by
+    // Person’s name
+
+    public void sortAddressBook() {
+        List<Contact> sortedAddressBook =  contactList.stream().sorted(Comparator.comparing(Contact::getFirstName)).collect(Collectors.toList());
 
         sortedAddressBook.forEach(contact -> contact.displayContact());
+    }
+
+    //UC12 - Ability to sort the entries in
+    // the address book by City,
+    // State, or Zip
+    public void sortAddressBookByCityOrStateOrZip(String option) {
+        List<Contact> sortedAddressBookByCityOrStateOrZip =  contactList.stream().collect(Collectors.toList());
+        switch(option) {
+            case "city" :
+                System.out.println("Display AddressBook in sorted order by city");
+                sortedAddressBookByCityOrStateOrZip.sort(Comparator.comparing(Contact::getCity));
+                break;
+
+            case "state" :
+                System.out.println("Display AddressBook in sorted order by state");
+                sortedAddressBookByCityOrStateOrZip.sort(Comparator.comparing(Contact::getState));
+                break;
+
+            case "zip" :
+                System.out.println("Display AddressBook in sorted order by zip");
+                sortedAddressBookByCityOrStateOrZip.sort(Comparator.comparing(Contact::getZip));
+                break;
+        }
+
+        sortedAddressBookByCityOrStateOrZip.forEach(contact -> contact.displayContact());
     }
 }

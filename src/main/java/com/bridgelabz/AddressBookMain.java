@@ -2,16 +2,15 @@ package com.bridgelabz;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-// adding UC-10 getting person details contact in address book System
+// adding UC-12 Sorting the city name zip code  in address book System
 public class AddressBookMain
 {
 
-
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        ArrayList<AddressBookSystem> addressBookList = new ArrayList<>();
-        AddressBookSystem addressBook1 = new AddressBookSystem();
-        AddressBookSystem addressBook2 = new AddressBookSystem();
+        ArrayList<AddressBook> addressBookList = new ArrayList<>();
+        AddressBook addressBook1 = new AddressBook();
+        AddressBook addressBook2 = new AddressBook();
 
         int choice =1;
         //Store contacts to addressBook1
@@ -100,9 +99,20 @@ public class AddressBookMain
         // Person’s name
 
         System.out.println("Display AddressBook in sorted order");
-        for (AddressBookSystem addressBookSystem : addressBookList) {
-            addressBookSystem.sortAddressBook();
+        for(int i=0;i<addressBookList.size();i++) {
+            addressBookList.get(i).sortAddressBook();
         }
 
+
+        //UC12 - Ability to sort the entries in
+        // the address book by City,
+        // State, or Zip
+
+        System.out.println("Enter choice to sort Address Book upon");
+        String option = input.next();
+
+        for(int i=0;i<addressBookList.size();i++) {
+            addressBookList.get(i).sortAddressBookByCityOrStateOrZip(option);
+        }
     }
 }
