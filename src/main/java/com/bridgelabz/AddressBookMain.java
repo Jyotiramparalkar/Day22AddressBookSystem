@@ -13,11 +13,11 @@ public class AddressBookMain
         AddressBookSystem addressBook1 = new AddressBookSystem();
         AddressBookSystem addressBook2 = new AddressBookSystem();
 
-        int choice = 1;
+        int choice =1;
         //Store contacts to addressBook1
 
-        while (choice != 0) {
-            switch (choice) {
+        while (choice!=0){
+            switch (choice){
                 case 0:
                     return;
                 case 1:
@@ -44,10 +44,10 @@ public class AddressBookMain
 
         //Store contacts to addressBook2
         System.out.println("Enter input for 2nd AddressBook");
-        choice = 1;
-        while (choice != 0) {
+        choice =1;
+        while (choice!=0){
 
-            switch (choice) {
+            switch (choice){
                 case 0:
                     return;
 
@@ -75,24 +75,34 @@ public class AddressBookMain
 
         //Display all addressBooks stored in addressBookList
         System.out.println("Displaying all address books stored in arraylist\n");
-        for (AddressBookSystem system : addressBookList) {
-            system.displayAddressBook();
+        for(int i=0;i<addressBookList.size();i++) {
+            addressBookList.get(i).displayAddressBook();
         }
 
         //Display person within the city
         System.out.println("\nEnter city name to find person");
         String cityName = input.next();
         System.out.println("Display person within the city");
-        for (AddressBookSystem bookSystem : addressBookList) {
-            bookSystem.displayPersonInCity(cityName);
+        for(int i=0;i<addressBookList.size();i++) {
+            addressBookList.get(i).displayPersonInCity(cityName);
         }
 
         //Display person within the state
         System.out.println("\nEnter state to find person");
         String stateName = input.next();
         System.out.println("Display person within the state");
-        for (AddressBookSystem addressBookSystem : addressBookList) {
-            addressBookSystem.displayPersonInState(stateName);
+        for(int i=0;i<addressBookList.size();i++) {
+            addressBookList.get(i).displayPersonInState(stateName);
         }
+
+        //UC11 - Ability to sort the entries in the
+        // address book alphabetically by
+        // Person’s name
+
+        System.out.println("Display AddressBook in sorted order");
+        for (AddressBookSystem addressBookSystem : addressBookList) {
+            addressBookSystem.sortAddressBook();
+        }
+
     }
 }

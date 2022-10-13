@@ -1,16 +1,20 @@
 package com.bridgelabz;
-
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Scanner;
-// UC-8 searching contact in city or multiple  in address book System
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+
+// UC-11 searching contact in city or multiple  in address book System
 public class AddressBookSystem {
 
     ArrayList<Contact> contactList = new ArrayList<Contact>();
     Scanner input = new Scanner(System.in);
 
-    String firstName1,lastName1, address1, city1, state1, zip1, phoneNo1, email1;
+    String firstName1, lastName1, address1, city1, state1, zip1, phoneNo1, email1;
 
     //add contact to addressbook
 
@@ -25,17 +29,15 @@ public class AddressBookSystem {
         phoneNo1 = input.nextLine();
         email1 = input.nextLine();
 
-        Contact personContact =  new Contact(firstName1, lastName1, address1, city1, state1, zip1, phoneNo1, email1);
-        if(contactList.isEmpty()) {
+        Contact personContact = new Contact(firstName1, lastName1, address1, city1, state1, zip1, phoneNo1, email1);
+        if (contactList.isEmpty()) {
             contactList.add(personContact);
-        }
-        else {
-            for(int i=0; i < contactList.size(); i++) {
-                if(contactList.get(i).firstName.equals(firstName1) && contactList.get(i).lastName.equals(lastName1)) {
+        } else {
+            for (int i = 0; i < contactList.size(); i++) {
+                if (contactList.get(i).firstName.equals(firstName1) && contactList.get(i).lastName.equals(lastName1)) {
                     System.out.println("Person already exists with same first name and last name");
                     break;
-                }
-                else {
+                } else {
                     contactList.add(personContact);
                 }
             }
@@ -45,7 +47,7 @@ public class AddressBookSystem {
     // Edit person name for the given name
 
     public void editPersonName() {
-        int check=0;
+        int check = 0;
         System.out.println("\nEnter current name of person to edit name");
         String currentName = input.nextLine();
         System.out.println("Enter name to update");
@@ -60,7 +62,7 @@ public class AddressBookSystem {
             }
         }
 
-        if(check==0) {
+        if (check == 0) {
             System.out.println("No record found with given name");
         }
     }
@@ -81,32 +83,34 @@ public class AddressBookSystem {
 
         System.out.println("\nEnter name of person to delete contact");
         String name = input.nextLine();
-        int found=0;
-        for(int i=0; i <contactList.size(); i++) {
-            if(contactList.get(i).firstName.equals(name)) {
+        int found = 0;
+        for (int i = 0; i < contactList.size(); i++) {
+            if (contactList.get(i).firstName.equals(name)) {
                 contactList.remove(i);
-                found=1;
+                found = 1;
                 return;
             }
         }
-        if(found==0) {
+        if (found == 0) {
             System.out.println("No record found with given name to delete");
         }
     }
 
     //Search for person in city
     Dictionary<String, String> cityPerson = new Hashtable<String, String>();
+
     public void displayPersonInCity(String cityName) {
         for (Contact contact : contactList) {
             if (contact.city.equalsIgnoreCase(cityName)) {
                 cityPerson.put(cityName, contact.firstName);
             }
         }
-        System.out.println("Number of contacts with city "+cityName+" : "+cityPerson.size()+"\n"+cityPerson);
+        System.out.println("Number of contacts with city " + cityName + " : " + cityPerson.size() + "\n" + cityPerson);
     }
 
     //Search for person in state
     Dictionary<String, String> statePerson = new Hashtable<String, String>();
+
     public void displayPersonInState(String stateName) {
 
         for (Contact contact : contactList) {
@@ -114,6 +118,15 @@ public class AddressBookSystem {
                 statePerson.put(stateName, contact.firstName);
             }
         }
-        System.out.println("Number of contacts with state "+stateName+" : "+statePerson.size()+"\n"+statePerson);
+        System.out.println("Number of contacts with state " + stateName + " : " + statePerson.size() + "\n" + statePerson);
+
+
+    }
+
+    public void sortAddressBook()
+    {
+        List<Contact> sortedAddressBook = contactList.stream().sorted(Comparator.comparing(Contact::getFirstName)).collect(Collectors.toList());
+
+        sortedAddressBook.forEach(contact -> contact.displayContact());
     }
 }
